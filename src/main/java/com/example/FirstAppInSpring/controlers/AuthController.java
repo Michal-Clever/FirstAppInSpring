@@ -1,6 +1,7 @@
 package com.example.FirstAppInSpring.controlers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,15 +32,20 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    @ResponseBody
+  //  @ResponseBody
     public String register(@RequestParam("login") String login,
                            @RequestParam("password") String password,
                            @RequestParam("passwordReapet") String passwordReapet,
-                           @RequestParam("email") String email) {
+                           @RequestParam("email") String email,
+                           Model model) {
         if (!password.equals(passwordReapet)) {
-            return "Hasła nie są takie same";
+          //  return "Hasła nie są takie same";
+            model.addAttribute("info", "Hasła się nie zgadzają!");
+            return "register";
         }
-        return "Konto utworzone";
+        //return "Konto utworzone";
+        model.addAttribute("info","Zarejestrowano :D");
+        return "register";
     }
 
 }

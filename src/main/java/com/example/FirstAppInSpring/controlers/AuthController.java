@@ -25,4 +25,21 @@ public class AuthController {
         return "Błędne dane";
     }
 
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @PostMapping("/register")
+    @ResponseBody
+    public String register(@RequestParam("login") String login,
+                           @RequestParam("password") String password,
+                           @RequestParam("passwordReapet") String passwordReapet,
+                           @RequestParam("email") String email) {
+        if (!password.equals(passwordReapet)) {
+            return "Hasła nie są takie same";
+        }
+        return "Konto utworzone";
+    }
+
 }
